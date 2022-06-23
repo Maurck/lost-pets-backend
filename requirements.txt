@@ -1,0 +1,7 @@
+flask-bcrypt
+flask-restx
+pyjwt
+Flask-Script
+flask-cors
+python-dotenv
+mongoengine
