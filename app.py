@@ -1,13 +1,20 @@
-import os
+'''Archivo que ejecuta la aplicacion'''
+from flask_jwt_extended import JWTManager
+from flask_bcrypt import Bcrypt
 
-from app.config.config import create_app
-from app import blueprint
+from config.config import server_config
+from config.config import get_app
+from config.config import run_app
+from routes.pet import create_routes_pet
+from routes.user import create_routes_user
 
-app = create_app(os.getenv('BOILERPLATE_ENV') or 'dev')
+app = get_app(__name__)
+bcrypt = Bcrypt(app)
+jwt = JWTManager(app)
 
-
-app.register_blueprint(blueprint)
-app.app_context().push()
+server_config(app)
+create_routes_user(app, bcrypt)
+create_routes_pet(app)
 
 if __name__ == '__main__':
-    app.run()
+    run_app(app)
