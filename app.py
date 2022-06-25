@@ -13,6 +13,11 @@ bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
 server_config(app)
+
+@app.get('/')
+def index():
+    return 'Hola Mundo'
+
 create_routes_user(app, bcrypt)
 create_routes_pet(app)
 
