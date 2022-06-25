@@ -6,3 +6,4 @@ mongoengine
 python-dotenv
 cloudinary
 flask_cors
+cerberus
