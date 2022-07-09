@@ -2,7 +2,7 @@
 register.py: Modulo para el registro
 '''
 from flask import jsonify
-from utils.utils import json_message, create_jwt
+from utils.utils import create_jwt, json_message_error_code
 from models.user import User
 
 
@@ -18,26 +18,26 @@ class RegisterFlow:
             email=req_user_email
         ).first()
 
-        if user_obj is None:
-            new_user = User(
-                name=request.json['name'],
-                password=bcrypt.generate_password_hash(request.json['password']).decode('utf-8'),
-                email=req_user_email,
-                mother_lastname=request.json['mother_lastname'],
-                father_lastname=request.json['father_lastname'],
-                address=request.json['address'],
-                dni=request.json['dni'],
-                phone_number=request.json['phone_number'],
-                nickname=request.json['nickname']
-            )
+        if user_obj is not None:
+            return json_message_error_code("Usuario ya registrado")
 
-            new_user.save()
+        new_user = User(
+            name=request.json['name'],
+            password=bcrypt.generate_password_hash(request.json['password']).decode('utf-8'),
+            email=req_user_email,
+            mother_lastname=request.json['mother_lastname'],
+            father_lastname=request.json['father_lastname'],
+            address=request.json['address'],
+            dni=request.json['dni'],
+            phone_number=request.json['phone_number'],
+            nickname=request.json['nickname']
+        )
 
-            access_token = create_jwt(new_user.to_json()["id"], new_user.to_json()["email"])
-            return jsonify({
-                "msg": "Usuario registrado",
-                "token": access_token,
-                "user": new_user.to_json()
-            })
+        new_user.save()
 
-        return json_message("Usuario ya registrado")
+        access_token = create_jwt(new_user.to_json()["id"], new_user.to_json()["email"])
+        return jsonify({
+            "msg": "Usuario registrado",
+            "token": access_token,
+            "user": new_user.to_json()
+        })

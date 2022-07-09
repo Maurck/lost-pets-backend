@@ -1,7 +1,5 @@
-from os import access
 from flask import jsonify
-from flask_jwt_extended import create_access_token
-from utils.utils import create_jwt, json_message
+from utils.utils import create_jwt, json_message_error_code
 from models.user import User
 
 
@@ -16,14 +14,14 @@ class LoginFlow:
             email=user_email
         ).first()
 
-        if user_obj is not None:
-            if bcrypt.check_password_hash(user_obj.to_json()['password'], user_password):
-                access_token = create_jwt(user_obj.to_json()['id'], user_obj.to_json()['email'])
-                return jsonify({
-                    "token": access_token,
-                    "user": user_obj.to_json()
-                })
+        if user_obj is None:
+            return json_message_error_code("El usuario no está registrado")
 
-            return json_message("Contraseña incorrecta")
+        if bcrypt.check_password_hash(user_obj.to_json()['password'], user_password):
+            access_token = create_jwt(user_obj.to_json()['id'], user_obj.to_json()['email'])
+            return jsonify({
+                "token": access_token,
+                "user": user_obj.to_json()
+            })
 
-        return json_message("El usuario no está registrado")
+        return json_message_error_code("Contraseña incorrecta")

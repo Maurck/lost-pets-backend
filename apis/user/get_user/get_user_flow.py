@@ -1,6 +1,6 @@
 from flask import jsonify
 from models.user import User
-from utils.utils import json_message
+from utils.utils import json_message_error_code
 
 
 class GetUserFlow:
@@ -12,7 +12,7 @@ class GetUserFlow:
             id=user_id
         ).first()
 
-        if user_obj is not None:
-            return jsonify({"user": user_obj.to_json()})
+        if user_obj is None:
+            return json_message_error_code("Usuario no encontrado")
 
-        return json_message("Usuario no encontrado")
+        return jsonify({"user": user_obj.to_json()})
