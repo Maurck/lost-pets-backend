@@ -3,6 +3,7 @@ pet.py: Modulo para definir las rutas relacionadas con la API Pet
 '''
 from flask import request
 from apis.pet.delete_pet.delete_pet import DeletePet
+from apis.pet.get_pet.get_pet import GetPet
 from apis.pet.get_pets.get_pets import GetPets
 
 from apis.pet.register.register_pet import RegisterPet
@@ -27,3 +28,9 @@ def create_routes_pet(app):
     def delete_pet():
         delete_pet = DeletePet()
         return delete_pet(request)
+
+    # pylint: disable=unused-variable
+    @app.route('/pet')
+    def get_pet():
+        get_pet = GetPet()
+        return get_pet(request)
