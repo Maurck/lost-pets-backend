@@ -10,6 +10,7 @@ register_pet_body_schema = {
         'required': True
     },
     'birthdate': {
+        'type': 'date',
         'nullable': False,
         'required': True
     },    
