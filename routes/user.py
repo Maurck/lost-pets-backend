@@ -3,6 +3,7 @@ user.py: Modulo para definir las rutas relacionadas con la API User
 '''
 from flask import request
 from flask_jwt_extended import jwt_required
+from apis.user.delete_user.delete_user import DeleteUser
 
 from apis.user.delete_users.delete_users import DeleteUsers
 from apis.user.login.login import Login
@@ -40,13 +41,6 @@ def create_routes_user(app, bcrypt):
         get_user = GetUser()
         return get_user(request)
 
-    # # pylint: disable=unused-variable
-    # @app.route('/user/search')
-    # @jwt_required()
-    # def get_user_by_name():
-    #     get_user_by_name = GetUserByName()
-    #     return get_user_by_name(request)
-
     
     # pylint: disable=unused-variable
     @app.route('/users')
@@ -55,10 +49,8 @@ def create_routes_user(app, bcrypt):
         get_users = GetUsers()
         return get_users(request)
 
-    
-    # # pylint: disable=unused-variable
-    # @app.route('/user', methods=['PUT'])
-    # @jwt_required()
-    # def update_user():
-    #     update_user = UpdateUser()
-    #     return update_user(request, bcrypt)
+    @app.route('/user', methods=['DELETE'])
+    @jwt_required()
+    def delete_user():
+        delete_user = DeleteUser()
+        return delete_user(request)
