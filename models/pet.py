@@ -10,6 +10,7 @@ class Pet(Document):
     Clase que define el modelo mascota
     '''
     name = StringField(required=True)
+    owner_name = StringField(required=True, default="Sin dueño")
     gender = StringField(required=True)
     birthdate = DateField(required=True)
     registered_at = DateField(required=False, default=date.today().strftime("%d-%m-%Y"))
@@ -23,9 +24,10 @@ class Pet(Document):
         '''
         Metodo que devuelve los atributos de la clase en formato json
         '''
-        user_dict = {
+        pet_dict = {
             'id': str(self.pk),
             "name": self.name,
+            "owner_name": self.owner_name,
             "gender": self.gender,
             "birthdate": self.birthdate,
             "registered_at": self.registered_at,
@@ -35,4 +37,4 @@ class Pet(Document):
             "size": self.size,
             "owner_id": str(self.owner_id)
         }
-        return user_dict
+        return pet_dict
