@@ -9,3 +9,6 @@ flask_cors
 cerberus
 dnspython
 python-dateutil
+opencv-python==4.5.5.64
+scikit-image
+numpy
