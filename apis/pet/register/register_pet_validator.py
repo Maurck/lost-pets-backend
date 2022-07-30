@@ -35,11 +35,18 @@ register_pet_body_schema = {
         'required': True,
         'minlength': 24,
         'maxlength': 24
+    },
+    'img': {
+        'required': True,
+        'nullable': False
     }
 }
 
 class RegisterPetValidator:
 
     def __call__(self, request):
-        body_validation_errors = validate_parameters(request.json, register_pet_body_schema)
+
+        full_request = dict(request.form.copy(), **request.files.copy())
+
+        body_validation_errors = validate_parameters(full_request, register_pet_body_schema)
         return body_validation_errors
