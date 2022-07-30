@@ -9,3 +9,6 @@ flask_cors
 cerberus
 dnspython
 python-dateutil
+opencv-contrib-python-headless
+scikit-image
+numpy
