@@ -6,6 +6,7 @@ from apis.pet.delete_pet.delete_pet import DeletePet
 from apis.pet.delete_pets.delete_pets import DeletePets
 from apis.pet.get_pet.get_pet import GetPet
 from apis.pet.get_pets.get_pets import GetPets
+from apis.pet.get_pets_by_owner_id.get_pets_by_owner_id import GetPetsByOwnerId
 
 from apis.pet.register.register_pet import RegisterPet
 
@@ -19,10 +20,15 @@ def create_routes_pet(app):
         register_pet = RegisterPet()
         return register_pet(request)
 
-    @app.route('/pets', methods=['GET'])
+    @app.route('/pets/all', methods=['GET'])
     def get_pets():
         get_pets = GetPets()
         return get_pets(request)
+
+    @app.route('/pets', methods=['GET'])
+    def get_pets_by_owner_id():
+        get_pets_by_owner_id = GetPetsByOwnerId()
+        return get_pets_by_owner_id(request)
 
     # pylint: disable=unused-variable
     @app.route('/pet', methods=['DELETE'])
