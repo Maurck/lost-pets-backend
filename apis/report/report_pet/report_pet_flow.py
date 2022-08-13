@@ -29,7 +29,7 @@ class ReportPetFlow:
 
         if pet is None:
             return json_message_error_code("Mascota a reportar no encontrada")
-
+        
         reported_img = request.files['reported_img']
         upload_data = cloudinary.uploader.upload(reported_img)
 
@@ -43,6 +43,9 @@ class ReportPetFlow:
         )
 
         new_report.save()
+
+        pet.is_reported = True
+        pet.save()
 
         return jsonify({
             "msg": "Reporte creado",
