@@ -2,7 +2,7 @@
 pet.py: Modulo para definir el modelo Mascota
 '''
 from datetime import date
-from mongoengine import Document, StringField, DateField, ObjectIdField
+from mongoengine import Document, StringField, DateField, ObjectIdField, BooleanField
 
 
 class Pet(Document):
@@ -21,6 +21,7 @@ class Pet(Document):
     characteristics = StringField(required=True)
     size = StringField(required=True)
     owner_id = ObjectIdField(required=True)
+    is_reported = BooleanField(required=False, default=False)
 
     def to_json(self):
         '''
@@ -39,6 +40,7 @@ class Pet(Document):
             "breed": self.breed,
             "characteristics": self.characteristics,
             "size": self.size,
+            "is_reported": self.is_reported,
             "owner_id": str(self.owner_id)
         }
         return pet_dict
