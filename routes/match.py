@@ -8,3 +8,9 @@ def create_routes_match(app):
     def match():
         match = Match()
         return match(request)
+
+
+    @app.route('/match', methods=['GET'])
+    def breed():
+        match = Match()
+        return match(request)
