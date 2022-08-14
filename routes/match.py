@@ -1,6 +1,6 @@
 from flask import request
 from apis.ia.match.match import Match
-
+from apis.ia.breed.breed import Breed
 
 def create_routes_match(app):
     
@@ -10,7 +10,7 @@ def create_routes_match(app):
         return match(request)
 
 
-    @app.route('/match', methods=['GET'])
+    @app.route('/breed', methods=['GET'])
     def breed():
-        match = Match()
-        return match(request)
+        breed = Breed()
+        return breed(request)
