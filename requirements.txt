@@ -12,3 +12,8 @@ python-dateutil
 opencv-python-headless
 scikit-image
 numpy
+json
+requests
+pandas
+
+
