@@ -10,7 +10,7 @@ def create_routes_match(app):
         return match(request)
 
 
-    @app.route('/breed', methods=['GET'])
+    @app.route('/breed', methods=['POST'])
     def breed():
         breed = Breed()
         return breed(request)
