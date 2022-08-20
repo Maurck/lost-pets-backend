@@ -1,5 +1,6 @@
 from flask import request
 from apis.report.delete_report.delete_report import DeleteReport
+from apis.report.get_report_by_pet_id.get_report_by_pet_id import GetReportByPetId
 from apis.report.get_reported_pets.get_reported_pets import GetReportedPets
 from apis.report.get_reports.get_reports import GetReports
 from apis.report.report_pet.report_pet import ReportPet
@@ -28,3 +29,8 @@ def create_routes_report(app):
     def delete_report():
         delete_report = DeleteReport()
         return delete_report(request)
+
+    @app.route('/report')
+    def get_report_by_pet_id():
+        get_report_by_pet_id = GetReportByPetId()
+        return get_report_by_pet_id(request)
