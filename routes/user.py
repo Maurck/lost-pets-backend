@@ -29,14 +29,12 @@ def create_routes_user(app, bcrypt):
        return login(request, bcrypt)
 
     @app.route('/users', methods=['DELETE'])
-    @jwt_required()
     def delete_users():
         delete_users = DeleteUsers()
         return delete_users(request)
 
     # pylint: disable=unused-variable
     @app.route('/user')
-    @jwt_required()
     def get_user():
         get_user = GetUser()
         return get_user(request)
@@ -44,13 +42,11 @@ def create_routes_user(app, bcrypt):
     
     # pylint: disable=unused-variable
     @app.route('/users')
-    @jwt_required()
     def get_users():
         get_users = GetUsers()
         return get_users(request)
 
     @app.route('/user', methods=['DELETE'])
-    @jwt_required()
     def delete_user():
         delete_user = DeleteUser()
         return delete_user(request)
